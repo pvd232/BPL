@@ -1,0 +1,13 @@
+# Pyrefly configuration for BPL project
+# https://pyrefly.org/configuration
+
+# Point the language server to your conda environment
+conda-environment = "bpl"
+
+# (Optional fallback if not using conda CLI: python-interpreter-path = "/Users/machina/miniconda3/envs/bpl/bin/python")
+
+# Suppress strict type errors common with dynamic JAX / Equinox module patterns in notebooks
+[errors]
+bad-argument-type = false
+bad-assignment = false
+not-callable = false

@@ -1,0 +1,10 @@
+data/
+lit/
+.viper/
+experiments/
+results/
+__pycache__/
+*.pyc
+*.egg-info/
+.ruff_cache/
+.DS_Store
