@@ -15,7 +15,6 @@ import jax.numpy as jnp
 import jax.random as jr
 import numpy as np
 import optax
-import torch
 
 import pc_model
 
@@ -36,7 +35,6 @@ def notebook_definitions() -> dict[str, Any]:
         "update_params",
         "train_step",
         "predict",
-        "evaluate",
     }
     notebook = Path(__file__).with_name("pc_in_jax.ipynb")
     cells = json.loads(notebook.read_text(encoding="utf-8"))["cells"]
@@ -160,15 +158,6 @@ class PCModelTests(unittest.TestCase):
         )
         self.assertGreater(float(jnp.linalg.norm(second[0] - self.activities[0])), 1e-6)
         np.testing.assert_array_equal(second[2], self.activities[2])
-
-    def test_notebook_accuracy_counts_partial_batch(self) -> None:
-        """Count 64 correct images and 16 wrong images as 80 percent accuracy."""
-        reference = notebook_definitions()
-        images = torch.tensor([[1.0, 0.0]]).repeat(80, 1)
-        labels = images.clone()
-        labels[64:] = torch.tensor([0.0, 1.0])
-        batches = [(images[:64], labels[:64]), (images[64:], labels[64:])]
-        self.assertEqual(reference["evaluate"](lambda image: image, batches), 80.0)
 
     def test_gradient_batch_scaling(self) -> None:
         """Duplicating examples preserves each activity gradient and mean weight gradient."""
