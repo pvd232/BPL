@@ -8,3 +8,5 @@ __pycache__/
 *.egg-info/
 .ruff_cache/
 .DS_Store
+wandb/
+.ipynb_checkpoints/
